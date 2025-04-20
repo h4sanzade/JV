@@ -51,5 +51,19 @@ class LoginUI : AppCompatActivity() {
         binding.alreadyAcc.text = spannable
         binding.alreadyAcc.movementMethod = LinkMovementMethod.getInstance()
         binding.alreadyAcc.highlightColor = Color.TRANSPARENT
+
+        binding.googleIcon.setOnClickListener {
+            Toast.makeText(this, "Google", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.icApple.setOnClickListener {
+            Toast.makeText(this, "Apple", Toast.LENGTH_SHORT).show()
+        }
+        binding.icFacebook.setOnClickListener {
+            Toast.makeText(this, "Facebook", Toast.LENGTH_SHORT).show()
+        }
+
     }
+
+
 }
