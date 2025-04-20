@@ -7,14 +7,17 @@
     android:layout_height="match_parent"
     android:background="@color/black"
     tools:context=".LoginUI">
-    
+
     <ImageView
         android:id="@+id/loginImg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHeight_percent="0.45"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
         android:src="@drawable/loginmain_img_background">
     </ImageView>
 
@@ -24,7 +27,7 @@
         android:layout_height="0dp"
         android:textSize="40sp"
         android:text="@string/hesab_yarat"
-        android:layout_marginTop="-40dp"
+        android:layout_marginTop="-20dp"
         android:gravity="center"
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
@@ -64,7 +67,6 @@
         app:boxCornerRadiusTopStart="8dp"
         app:boxStrokeColor="#03224D"
         app:boxStrokeWidth="1dp"
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/alreadyAcc"
@@ -114,18 +116,93 @@
 
 
     <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/checkBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="1dp"
+        android:button="@drawable/custom_checkbox"
+        android:buttonTint="@color/white"
+        android:padding="10dp"
         android:text="@string/user_permission"
         android:textColor="@color/white"
+        android:textSize="8sp"
         app:layout_constraintEnd_toEndOf="parent"
-        android:textSize="12sp"
-
-
-        android:backgroundTint="@color/white"
+        android:layout_marginEnd="50dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/passInputLayout" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/signUp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/checkBox"
+        app:cornerRadius="12dp"
+        android:layout_margin="20dp"
+        android:padding="10dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/sign_button_txt"
+        android:textSize="16sp"
+        android:fontFamily="@font/montserrat_regular"
+        android:backgroundTint="#A9191B"
+        >
+
+    </com.google.android.material.button.MaterialButton>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center|top"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+     android:layout_marginTop="10dp"
+        android:layout_marginBottom="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/signUp"
+        >
+
+        <ImageButton
+            android:id="@+id/googleIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/icon_background"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="10dp"
+            android:src="@drawable/ic_google" />
+
+        <Space
+            android:layout_width="40dp"
+            android:layout_height="0dp" />
+
+        <ImageButton
+            android:id="@+id/icApple"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/icon_background"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="10dp"
+            android:src="@drawable/ic_iphone" />
+
+        <Space
+            android:layout_width="40dp"
+            android:layout_height="0dp" />
+
+        <ImageButton
+            android:id="@+id/ic_facebook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/icon_background"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="10dp"
+            android:src="@drawable/ic_fb" />
+
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
