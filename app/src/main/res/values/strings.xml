@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">JV</string>
+    <string name="hesab_yarat">Hesab Yarat</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="user_permission">Mən İstifadə Şərtləri və Qaydaları ilə razıyam.</string>
+</resources>
