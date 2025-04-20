@@ -33,7 +33,6 @@ class LoginUI : AppCompatActivity() {
         val clickableSpan = object : ClickableSpan() {
             override fun onClick(widget: View) {
                 Toast.makeText(this@LoginUI, "Daxil ol clicked!", Toast.LENGTH_SHORT).show()
-
             }
 
             override fun updateDrawState(ds: TextPaint) {
