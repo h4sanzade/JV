@@ -1,5 +1,7 @@
 package com.materialdesign.jv
 
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import kotlin.getValue
 
 object RetrofitInstance {
