@@ -14,12 +14,10 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
-import com.materialdesign.jv.LoginUI
 import com.materialdesign.jv.databinding.ActivityRegisterUiBinding
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
-import kotlin.jvm.java
 
 class Register_UI : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterUiBinding
@@ -30,12 +28,10 @@ class Register_UI : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(binding.root)
 
-        // Since your Register UI layout is currently empty, I'm assuming you'll add the necessary fields
-        // This is a placeholder for the registration button click listener
-        // You'll need to update your activity_register_ui.xml with proper UI elements
-
+        setupClickableText()
         setupRegisterButton()
     }
+
     private fun setupClickableText() {
         val fullText = "Artıq hesabın var? Daxil ol"
         val spannable = SpannableString(fullText)
@@ -51,6 +47,7 @@ class Register_UI : AppCompatActivity() {
             override fun onClick(widget: View) {
                 val intent = Intent(this@Register_UI, LoginUI::class.java)
                 startActivity(intent)
+                finish() // Close the Register activity when navigating to Login
             }
 
             override fun updateDrawState(ds: TextPaint) {
@@ -65,27 +62,33 @@ class Register_UI : AppCompatActivity() {
         binding.alreadyAcc.highlightColor = Color.TRANSPARENT
     }
 
-
-
     private fun setupRegisterButton() {
-        // This is a placeholder - you'll need to add a register button to your layout
-        // binding.registerButton.setOnClickListener {
-        //     val username = binding.usernameEditText.text.toString()
-        //     val password = binding.passwordEditText.text.toString()
-        //     val phoneNumber = binding.phoneNumberEditText.text.toString()
-        //
-        //     if (username.isEmpty() || password.isEmpty() || phoneNumber.isEmpty()) {
-        //         Toast.makeText(this, "Zəhmət olmasa, bütün sahələri doldurun", Toast.LENGTH_SHORT).show()
-        //         return@setOnClickListener
-        //     }
-        //
-        //     performSignUp(username, password, phoneNumber)
-        // }
+        binding.registerButton.setOnClickListener {
+            val email = binding.emailInputEditText.text.toString()
+            val password = binding.passwordEditText.text.toString()
+            val confirmPassword = binding.confirmPasswordEditText.text.toString()
+            val phoneNumber = binding.phoneNumberInputEditText.text.toString()
+
+            // Check if any field is empty
+            if (email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty() || phoneNumber.isEmpty()) {
+                Toast.makeText(this, "Zəhmət olmasa, bütün sahələri doldurun", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            // Check if passwords match
+            if (password != confirmPassword) {
+                Toast.makeText(this, "Şifrələr uyğun gəlmir", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            // If everything is valid, proceed with registration
+            performSignUp(email, password, phoneNumber)
+        }
     }
 
     private fun performSignUp(username: String, password: String, phoneNumber: String) {
         // Disable register button to prevent multiple requests
-        // binding.registerButton.isEnabled = false
+        binding.registerButton.isEnabled = false
 
         lifecycleScope.launch {
             try {
@@ -93,7 +96,6 @@ class Register_UI : AppCompatActivity() {
                     username = username,
                     password = password,
                     phoneNumber = phoneNumber
-
                 )
 
                 val response = RetrofitInstance.api.signUp(signUpRequest)
@@ -105,43 +107,43 @@ class Register_UI : AppCompatActivity() {
 
                     Toast.makeText(
                         this@Register_UI,
-                        "Registration successful!",
+                        "Qeydiyyat uğurla tamamlandı!",
                         Toast.LENGTH_SHORT
                     ).show()
 
-                    // Navigate to main activity
-                    val intent = Intent(this@Register_UI, MainActivity::class.java)
+                    // Navigate to login activity
+                    val intent = Intent(this@Register_UI, LoginUI::class.java)
                     startActivity(intent)
                     finish() // Close registration activity
                 } else {
                     // Handle unsuccessful response
                     Toast.makeText(
                         this@Register_UI,
-                        "Registration failed: ${response.message() ?: "Unknown error"}",
+                        "Qeydiyyat uğursuz oldu: ${response.message() ?: "Naməlum xəta"}",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
             } catch (e: IOException) {
                 Toast.makeText(
                     this@Register_UI,
-                    "Network error. Please check your connection.",
+                    "Şəbəkə xətası. İnternet bağlantısını yoxlayın.",
                     Toast.LENGTH_SHORT
                 ).show()
             } catch (e: HttpException) {
                 Toast.makeText(
                     this@Register_UI,
-                    "API error ${e.code()}: ${e.message()}",
+                    "API xətası ${e.code()}: ${e.message()}",
                     Toast.LENGTH_SHORT
                 ).show()
             } catch (e: Exception) {
                 Toast.makeText(
                     this@Register_UI,
-                    "An unexpected error occurred: ${e.message}",
+                    "Gözlənilməz xəta baş verdi: ${e.message}",
                     Toast.LENGTH_SHORT
                 ).show()
             } finally {
                 // Re-enable register button
-                // binding.registerButton.isEnabled = true
+                binding.registerButton.isEnabled = true
             }
         }
     }
