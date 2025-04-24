@@ -5,4 +5,8 @@
     <string name="password">Password</string>
     <string name="user_permission">İstifadə Şərtləri və Qaydaları ilə razıyam.</string>
     <string name="sign_button_txt">Qeydiyyatdan keç</string>
+    <string name="phone_number">Phone number</string>
+    <string name="register_string">Hesabın yoxdur? Qeydiyyatdan keç</string>
+    <string name="forgetPass">Şifrəni unutmusan?</string>
+    <string name="signInButtonText">Daxil ol</string>
 </resources>

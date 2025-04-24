@@ -8,13 +8,10 @@ import android.text.TextPaint
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.view.View
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.materialdesign.jv.databinding.ActivityLoginUiBinding
 
 class LoginUI : AppCompatActivity() {
@@ -25,14 +22,14 @@ class LoginUI : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(binding.root)
-        val fullText = "Artıq hesabın var? Daxil ol"
+        val fullText = "Hesabın yoxdur? Qeydiyyatdan keç"
         val spannable = SpannableString(fullText)
 
         val redColor = ContextCompat.getColor(this, android.R.color.holo_red_dark)
 
         val clickableSpan = object : ClickableSpan() {
             override fun onClick(widget: View) {
-                Toast.makeText(this@LoginUI, "Daxil ol clicked!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@LoginUI, "Qeydiyyatdan keç clicked!", Toast.LENGTH_SHORT).show()
             }
 
             override fun updateDrawState(ds: TextPaint) {
@@ -43,8 +40,8 @@ class LoginUI : AppCompatActivity() {
         }
 
 
-        val startIndex = fullText.indexOf("Daxil ol")
-        val endIndex = startIndex + "Daxil ol".length
+        val startIndex = fullText.indexOf("Qeydiyyatdan keç")
+        val endIndex = startIndex + "Qeydiyyatdan keç".length
 
         spannable.setSpan(clickableSpan, startIndex, endIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
 

@@ -13,13 +13,14 @@
         android:id="@+id/loginImg"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:scaleType="centerCrop"
+        android:scaleType="fitCenter"
         android:adjustViewBounds="true"
-        android:src="@drawable/loginmain_img_background"
+        android:src="@drawable/ic_jv"
+        android:layout_marginTop="60dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHeight_percent="0.38" />
+        app:layout_constraintHeight_percent="0.25" />
 
 
     <TextView
@@ -44,10 +45,11 @@
         android:layout_marginTop="4dp"
         android:fontFamily="@font/montserrat_regular"
         android:gravity="center"
-        android:text="Artıq hesabın var? Daxil ol"
+        android:text="@string/register_string"
         android:textColor="@color/white"
-        android:textSize="12sp"
+        android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/createAcc"
         app:layout_constraintWidth_percent="0.9" />
@@ -74,8 +76,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_regular"
-            android:hint="@string/email"
-            android:inputType="textEmailAddress"
+            android:hint="@string/phone_number"
+            android:inputType="phone"
             android:padding="10dp"
             android:textColor="@color/white"
             android:textSize="14sp" />
@@ -112,18 +114,16 @@
             android:textSize="14sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.checkbox.MaterialCheckBox
-        android:id="@+id/checkBox"
+    <TextView
+        android:id="@+id/forgetPass"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:button="@drawable/custom_checkbox"
-        android:buttonTintMode="screen"
         android:padding="8dp"
-        android:text="@string/user_permission"
+        android:text="@string/forgetPass"
         android:textColor="@color/white"
-        android:textSize="8sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="9sp"
+        android:textAlignment="textEnd"
+        android:layout_marginStart="30dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/passInputLayout"
         app:layout_constraintWidth_percent="0.85" />
@@ -136,12 +136,13 @@
         android:backgroundTint="#A9191B"
         android:fontFamily="@font/montserrat_regular"
         android:padding="12dp"
-        android:text="@string/sign_button_txt"
+        android:text="@string/signInButtonText"
         android:textSize="14sp"
         app:cornerRadius="12dp"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/checkBox"
+        app:layout_constraintTop_toBottomOf="@id/forgetPass"
         app:layout_constraintWidth_percent="0.85" />
 
     <LinearLayout
@@ -184,7 +185,7 @@
         android:id="@+id/socialButtonsContainer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:orientation="horizontal"
         android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
