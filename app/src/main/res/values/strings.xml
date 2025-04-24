@@ -9,4 +9,7 @@
     <string name="register_string">Hesabın yoxdur? Qeydiyyatdan keç</string>
     <string name="forgetPass">Şifrəni unutmusan?</string>
     <string name="signInButtonText">Daxil ol</string>
+    <string name="signIn_RegisterUI">Artıq hesabın var? Daxil ol</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="register_ButtonText">Qeydiyyatdan Keç</string>
 </resources>

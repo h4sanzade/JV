@@ -1,15 +1,25 @@
 package com.materialdesign.jv
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.TextPaint
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
+import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
+import com.materialdesign.jv.LoginUI
 import com.materialdesign.jv.databinding.ActivityRegisterUiBinding
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
+import kotlin.jvm.java
 
 class Register_UI : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterUiBinding
@@ -26,6 +36,36 @@ class Register_UI : AppCompatActivity() {
 
         setupRegisterButton()
     }
+    private fun setupClickableText() {
+        val fullText = "Artıq hesabın var? Daxil ol"
+        val spannable = SpannableString(fullText)
+
+        val redColor = ContextCompat.getColor(this, android.R.color.holo_red_dark)
+
+        // Rəng span əlavə edirik
+        val startIndex = fullText.indexOf("Daxil ol")
+        val endIndex = startIndex + "Daxil ol".length
+
+        // ClickListener verəcəyik
+        spannable.setSpan(object : ClickableSpan() {
+            override fun onClick(widget: View) {
+                val intent = Intent(this@Register_UI, LoginUI::class.java)
+                startActivity(intent)
+            }
+
+            override fun updateDrawState(ds: TextPaint) {
+                super.updateDrawState(ds)
+                ds.color = redColor // Qırmızı rəng
+                ds.isUnderlineText = false // Altı xət çəkilməsin
+            }
+        }, startIndex, endIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+
+        binding.alreadyAcc.text = spannable
+        binding.alreadyAcc.movementMethod = LinkMovementMethod.getInstance()
+        binding.alreadyAcc.highlightColor = Color.TRANSPARENT
+    }
+
+
 
     private fun setupRegisterButton() {
         // This is a placeholder - you'll need to add a register button to your layout
@@ -53,6 +93,7 @@ class Register_UI : AppCompatActivity() {
                     username = username,
                     password = password,
                     phoneNumber = phoneNumber
+
                 )
 
                 val response = RetrofitInstance.api.signUp(signUpRequest)
