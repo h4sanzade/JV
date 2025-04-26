@@ -26,7 +26,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/close_button"
+        app:layout_constraintBottom_toTopOf="@+id/scroll_instruction"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/terms_title"
@@ -42,11 +42,25 @@
             android:textSize="14sp" />
     </ScrollView>
 
+    <TextView
+        android:id="@+id/scroll_instruction"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/montserrat_regular"
+        android:gravity="center"
+        android:text="Davam etmək üçün bütün şərtləri oxuyun"
+        android:textColor="#AAAAAA"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/close_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <Button
         android:id="@+id/close_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="#A9191B"
+        android:backgroundTint="@color/button_color_red"
         android:fontFamily="@font/montserrat_regular"
         android:text="Bağla"
         android:textColor="@color/white"

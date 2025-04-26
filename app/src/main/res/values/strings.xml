@@ -11,6 +11,7 @@
     <string name="signInButtonText">Daxil ol</string>
     <string name="signIn_RegisterUI">Artıq hesabın var? Daxil ol</string>
     <string name="confirm_password">Confirm Password</string>
+    <string name="scroll_instruction">Davam etmək üçün bütün şərtləri oxuyun</string>
     <string name="register_ButtonText">Qeydiyyatdan Keç</string>
     <string name="name_surname">Name,Surname</string>
 </resources>
