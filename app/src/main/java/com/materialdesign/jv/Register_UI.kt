@@ -14,13 +14,24 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
+import com.google.gson.Gson
+import com.google.gson.annotations.SerializedName
 import com.materialdesign.jv.databinding.ActivityRegisterUiBinding
 import kotlinx.coroutines.launch
+import okhttp3.ResponseBody
 import retrofit2.HttpException
 import java.io.IOException
 
+// Error response model
+data class ErrorResponse(
+    @SerializedName("message") val message: String? = null,
+    @SerializedName("error") val error: String? = null,
+    @SerializedName("errors") val errors: List<String>? = null
+)
+
 class Register_UI : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterUiBinding
+    private val gson = Gson()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,22 +49,20 @@ class Register_UI : AppCompatActivity() {
 
         val redColor = ContextCompat.getColor(this, android.R.color.holo_red_dark)
 
-        // Rəng span əlavə edirik
         val startIndex = fullText.indexOf("Daxil ol")
         val endIndex = startIndex + "Daxil ol".length
 
-        // ClickListener verəcəyik
         spannable.setSpan(object : ClickableSpan() {
             override fun onClick(widget: View) {
                 val intent = Intent(this@Register_UI, LoginUI::class.java)
                 startActivity(intent)
-                finish() // Close the Register activity when navigating to Login
+                finish()
             }
 
             override fun updateDrawState(ds: TextPaint) {
                 super.updateDrawState(ds)
-                ds.color = redColor // Qırmızı rəng
-                ds.isUnderlineText = true  // Altı xət çəkilməsin
+                ds.color = redColor
+                ds.isUnderlineText = true
             }
         }, startIndex, endIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
 
@@ -117,11 +126,12 @@ class Register_UI : AppCompatActivity() {
                     startActivity(intent)
                     finish() // Close registration activity
                 } else {
-                    // Handle unsuccessful response
+                    // Parse error response
+                    val errorMessage = parseErrorResponse(response.errorBody())
                     Toast.makeText(
                         this@Register_UI,
-                        "Qeydiyyat uğursuz oldu: ${response.message() ?: "Naməlum xəta"}",
-                        Toast.LENGTH_SHORT
+                        errorMessage,
+                        Toast.LENGTH_LONG
                     ).show()
                 }
             } catch (e: IOException) {
@@ -131,10 +141,12 @@ class Register_UI : AppCompatActivity() {
                     Toast.LENGTH_SHORT
                 ).show()
             } catch (e: HttpException) {
+                // Parse error response from HttpException
+                val errorMessage = parseErrorResponse(e.response()?.errorBody())
                 Toast.makeText(
                     this@Register_UI,
-                    "API xətası ${e.code()}: ${e.message()}",
-                    Toast.LENGTH_SHORT
+                    errorMessage,
+                    Toast.LENGTH_LONG
                 ).show()
             } catch (e: Exception) {
                 Toast.makeText(
@@ -146,6 +158,25 @@ class Register_UI : AppCompatActivity() {
                 // Re-enable register button
                 binding.registerButton.isEnabled = true
             }
+        }
+    }
+
+    private fun parseErrorResponse(errorBody: ResponseBody?): String {
+        return try {
+            if (errorBody != null) {
+                val errorResponse = gson.fromJson(errorBody.string(), ErrorResponse::class.java)
+                when {
+                    // Check for different possible error message formats
+                    !errorResponse.message.isNullOrEmpty() -> errorResponse.message
+                    !errorResponse.error.isNullOrEmpty() -> errorResponse.error
+                    !errorResponse.errors.isNullOrEmpty() -> errorResponse.errors.joinToString("\n")
+                    else -> "Qeydiyyat uğursuz oldu: Naməlum xəta"
+                }
+            } else {
+                "Qeydiyyat uğursuz oldu: Naməlum xəta"
+            }
+        } catch (e: Exception) {
+            "Qeydiyyat uğursuz oldu: Xəta mesajı işlənərkən problem yarandı"
         }
     }
 
