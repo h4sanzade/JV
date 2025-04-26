@@ -177,7 +177,7 @@
 
 
     <com.google.android.material.checkbox.MaterialCheckBox
-        android:id="@+id/forgetPass"
+        android:id="@+id/termsCheckBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -186,7 +186,7 @@
         android:padding="8dp"
         android:text="@string/user_permission"
         android:textColor="@color/white"
-        android:textSize="8sp"
+        android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/confirmPasswordInputLayout"
@@ -203,9 +203,10 @@
         android:text="@string/register_ButtonText"
         android:textSize="14sp"
         app:cornerRadius="12dp"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/forgetPass"
+        app:layout_constraintTop_toBottomOf="@id/termsCheckBox"
         app:layout_constraintWidth_percent="0.85" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
