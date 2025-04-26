@@ -82,20 +82,20 @@ class Register_UI : AppCompatActivity() {
             }
 
             // If everything is valid, proceed with registration
-            performSignUp(email, password, phoneNumber,confirmPassword)
+            performSignUp(email, password, confirmPassword, phoneNumber)
         }
     }
 
-    private fun performSignUp(username: String, password: String, phoneNumber: String,confirmPassword:String) {
+    private fun performSignUp(email: String, password: String, confirmPassword: String, phoneNumber: String) {
         // Disable register button to prevent multiple requests
         binding.registerButton.isEnabled = false
 
         lifecycleScope.launch {
             try {
                 val signUpRequest = SignUpRequest(
-                    username = username,
-                    password = password,
                     phoneNumber = phoneNumber,
+                    email = email,
+                    password = password,
                     confirmPassword = confirmPassword
                 )
 
