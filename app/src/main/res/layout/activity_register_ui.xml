@@ -46,7 +46,7 @@
         android:gravity="center"
         android:text="@string/signIn_RegisterUI"
         android:textColor="@color/white"
-        android:textSize="10sp"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
@@ -67,6 +67,7 @@
         app:boxStrokeWidth="1dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+
         app:layout_constraintTop_toBottomOf="@id/alreadyAcc"
         app:layout_constraintWidth_percent="0.85">
 
@@ -76,11 +77,14 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_regular"
             android:hint="@string/phone_number"
-            android:inputType="textEmailAddress"
+            android:inputType="phone"
+            android:selectAllOnFocus="true"
             android:padding="10dp"
             android:textColor="@color/white"
             android:textSize="14sp" />
     </com.google.android.material.textfield.TextInputLayout>
+
+
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/emailInputLayout"
@@ -105,7 +109,6 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_regular"
             android:hint="@string/email"
-
             android:inputType="textEmailAddress"
             android:padding="10dp"
             android:textColor="@color/white"

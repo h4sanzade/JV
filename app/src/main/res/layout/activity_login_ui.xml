@@ -47,7 +47,7 @@
         android:gravity="center"
         android:text="@string/register_string"
         android:textColor="@color/white"
-        android:textSize="10sp"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"

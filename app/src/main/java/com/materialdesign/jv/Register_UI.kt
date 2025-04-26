@@ -53,7 +53,7 @@ class Register_UI : AppCompatActivity() {
             override fun updateDrawState(ds: TextPaint) {
                 super.updateDrawState(ds)
                 ds.color = redColor // Qırmızı rəng
-                ds.isUnderlineText = false // Altı xət çəkilməsin
+                ds.isUnderlineText = true  // Altı xət çəkilməsin
             }
         }, startIndex, endIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
 
@@ -82,11 +82,11 @@ class Register_UI : AppCompatActivity() {
             }
 
             // If everything is valid, proceed with registration
-            performSignUp(email, password, phoneNumber)
+            performSignUp(email, password, phoneNumber,confirmPassword)
         }
     }
 
-    private fun performSignUp(username: String, password: String, phoneNumber: String) {
+    private fun performSignUp(username: String, password: String, phoneNumber: String,confirmPassword:String) {
         // Disable register button to prevent multiple requests
         binding.registerButton.isEnabled = false
 
@@ -95,7 +95,8 @@ class Register_UI : AppCompatActivity() {
                 val signUpRequest = SignUpRequest(
                     username = username,
                     password = password,
-                    phoneNumber = phoneNumber
+                    phoneNumber = phoneNumber,
+                    confirmPassword = confirmPassword
                 )
 
                 val response = RetrofitInstance.api.signUp(signUpRequest)

@@ -49,7 +49,7 @@ class LoginUI : AppCompatActivity() {
             override fun updateDrawState(ds: TextPaint) {
                 super.updateDrawState(ds)
                 ds.color = redColor
-                ds.isUnderlineText = false
+                ds.isUnderlineText = true
             }
         }
 
