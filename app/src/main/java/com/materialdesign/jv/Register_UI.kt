@@ -8,6 +8,7 @@ import android.text.Spanned
 import android.text.TextPaint
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
+import android.text.style.UnderlineSpan
 import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -40,6 +41,7 @@ class Register_UI : AppCompatActivity() {
         setContentView(binding.root)
 
         setupClickableText()
+        setupTermsCheckbox()
         setupRegisterButton()
     }
 
@@ -71,8 +73,68 @@ class Register_UI : AppCompatActivity() {
         binding.alreadyAcc.highlightColor = Color.TRANSPARENT
     }
 
+    private fun setupTermsCheckbox() {
+        // Create clickable "İstifadəçi Şərtləri və Qaydaları" text in checkbox
+        val checkboxText = binding.termsCheckBox.text.toString()
+        val termsText = "İstifadəçi Şərtləri və Qaydaları"
+
+        val startIndex = checkboxText.indexOf(termsText)
+        if (startIndex != -1) {
+            val endIndex = startIndex + termsText.length
+
+            val spannable = SpannableString(checkboxText)
+
+            // Add underline span
+            spannable.setSpan(
+                UnderlineSpan(),
+                startIndex,
+                endIndex,
+                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+
+            // Add clickable span
+            val clickableSpan = object : ClickableSpan() {
+                override fun onClick(widget: View) {
+                    showTermsAndConditions()
+                }
+
+                override fun updateDrawState(ds: TextPaint) {
+                    super.updateDrawState(ds)
+                    // Keep the default link color
+                    ds.isUnderlineText = true
+                }
+            }
+
+            spannable.setSpan(
+                clickableSpan,
+                startIndex,
+                endIndex,
+                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+
+            binding.termsCheckBox.text = spannable
+            binding.termsCheckBox.movementMethod = LinkMovementMethod.getInstance()
+            binding.termsCheckBox.highlightColor = Color.TRANSPARENT
+        }
+    }
+
+    private fun showTermsAndConditions() {
+        val termsFragment = TermsFragment()
+        termsFragment.show(supportFragmentManager, TermsFragment.TAG)
+    }
+
     private fun setupRegisterButton() {
         binding.registerButton.setOnClickListener {
+            // Check if terms checkbox is checked
+            if (!binding.termsCheckBox.isChecked) {
+                Toast.makeText(
+                    this,
+                    "Zəhmət olmasa, İstifadəçi Şərtləri və Qaydaları ilə razılaşın",
+                    Toast.LENGTH_SHORT
+                ).show()
+                return@setOnClickListener
+            }
+
             val email = binding.emailInputEditText.text.toString()
             val password = binding.passwordEditText.text.toString()
             val confirmPassword = binding.confirmPasswordEditText.text.toString()

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/black"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/terms_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="İstifadəçi Şərtləri və Qaydaları"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:id="@+id/terms_scroll_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/close_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/terms_title"
+        app:layout_constraintHeight_percent="0.7">
+
+        <TextView
+            android:id="@+id/terms_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_regular"
+            android:text="1. Xidmətdən istifadə\n\nBu tətbiqdən istifadə edərək, siz bu şərtləri tam şəkildə qəbul etmiş olursunuz. Əgər bu şərtlərlə razı deyilsinizsə, zəhmət olmasa tətbiqdən istifadə etməyin.\n\n2. Hesab məlumatları\n\nTətbiqdə qeydiyyatdan keçərkən, sizin təqdim etdiyiniz bütün məlumatların düzgün, dəqiq və tam olması üçün məsuliyyət daşıyırsınız. Bu məlumatların təhlükəsizliyini təmin etmək üçün şifrənizi qorumaq sizin məsuliyyətinizdədir.\n\n3. Məxfilik\n\nŞəxsi məlumatlarınızın necə toplanması və istifadə edilməsi haqqında məlumat üçün Məxfilik Siyasətimizi oxuyun.\n\n4. Xidmət dəyişiklikləri\n\nBiz bu tətbiqi və onun xidmətlərini istənilən vaxt dayandırmaq və ya dəyişdirmək hüququnu özümüzdə saxlayırıq.\n\n5. Hesab sonlandırılması\n\nBiz, öz mülahizəmizə əsasən, sizin hesabınızı hər hansı bir səbəbdən sonlandırmaq hüququnu özümüzdə saxlayırıq.\n\n6. Əqli mülkiyyət\n\nTətbiq və onun məzmunu, o cümlədən mətn, qrafika, loqolar, ikon, şəkillər və proqram kodu müvafiq qanunlarla qorunur.\n\n7. Məsuliyyətin məhdudlaşdırılması\n\nBiz tətbiqin istifadəsi nəticəsində yaranan birbaşa, dolayı, təsadüfi, xüsusi və ya nəticə zərərlərinə görə məsuliyyət daşımırıq.\n\n8. Qanunvericiliyə uyğunluq\n\nTətbiqdən istifadə edərkən, bütün yerli, milli və beynəlxalq qanunlara və qaydalara əməl etməlisiniz.\n\n9. Ümumi şərtlər\n\nBu şərtlərin hər hansı bir müddəası etibarsız və ya tətbiq edilə bilməz hesab edilərsə, qalan müddəalar tam qüvvədə qalacaqdır.\n\n10. Şərtlərdə dəyişikliklər\n\nBiz bu şərtləri istənilən vaxt dəyişdirmək hüququnu özümüzdə saxlayırıq. Dəyişikliklər tətbiq daxilində elan edildikdən sonra qüvvəyə minir."
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+    </ScrollView>
+
+    <Button
+        android:id="@+id/close_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#A9191B"
+        android:fontFamily="@font/montserrat_regular"
+        android:text="Bağla"
+        android:textColor="@color/white"
+        app:cornerRadius="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
