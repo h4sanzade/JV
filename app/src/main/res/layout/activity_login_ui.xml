@@ -136,6 +136,7 @@
         android:backgroundTint="#A9191B"
         android:fontFamily="@font/montserrat_regular"
         android:padding="12dp"
+        android:textColor="@color/white"
         android:text="@string/signInButtonText"
         android:textSize="14sp"
         app:cornerRadius="12dp"

@@ -41,9 +41,12 @@ class LoginUI : AppCompatActivity() {
 
         val clickableSpan = object : ClickableSpan() {
             override fun onClick(widget: View) {
-                // Navigate to register activity
+                // Navigate to register activity with animation
                 val intent = Intent(this@LoginUI, Register_UI::class.java)
                 startActivity(intent)
+
+                // Apply custom transition animation
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
             }
 
             override fun updateDrawState(ds: TextPaint) {
@@ -139,6 +142,7 @@ class LoginUI : AppCompatActivity() {
             }
         }
     }
+  
 
     private fun saveTokenToSharedPreferences(token: String) {
         val sharedPrefs = getSharedPreferences("auth_prefs", MODE_PRIVATE)

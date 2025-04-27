@@ -13,6 +13,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.google.gson.Gson
@@ -45,6 +46,7 @@ class Register_UI : AppCompatActivity() {
         setupRegisterButton()
     }
 
+
     private fun setupClickableText() {
         val fullText = "Artıq hesabın var? Daxil ol"
         val spannable = SpannableString(fullText)
@@ -57,8 +59,16 @@ class Register_UI : AppCompatActivity() {
         spannable.setSpan(object : ClickableSpan() {
             override fun onClick(widget: View) {
                 val intent = Intent(this@Register_UI, LoginUI::class.java)
-                startActivity(intent)
-                finish()
+
+                // Apply smooth transition animation (simple slide-in and slide-out)
+                val options = ActivityOptionsCompat.makeCustomAnimation(
+                    this@Register_UI,
+                    R.anim.slide_in_right,   // Slide-in from right
+                    R.anim.slide_out_left    // Slide-out to left
+                )
+
+                startActivity(intent, options.toBundle())  // Start activity with transition
+                finish()  // Close the current activity
             }
 
             override fun updateDrawState(ds: TextPaint) {
@@ -72,6 +82,10 @@ class Register_UI : AppCompatActivity() {
         binding.alreadyAcc.movementMethod = LinkMovementMethod.getInstance()
         binding.alreadyAcc.highlightColor = Color.TRANSPARENT
     }
+
+
+
+
 
     private fun setupTermsCheckbox() {
         // Create clickable "İstifadəçi Şərtləri və Qaydaları" text in checkbox
@@ -117,6 +131,8 @@ class Register_UI : AppCompatActivity() {
             binding.termsCheckBox.highlightColor = Color.TRANSPARENT
         }
     }
+
+
 
     private fun showTermsAndConditions() {
         val termsFragment = TermsFragment()
@@ -223,6 +239,7 @@ class Register_UI : AppCompatActivity() {
         }
     }
 
+
     private fun parseErrorResponse(errorBody: ResponseBody?): String {
         return try {
             if (errorBody != null) {
@@ -249,4 +266,6 @@ class Register_UI : AppCompatActivity() {
             apply()
         }
     }
+
+
 }
