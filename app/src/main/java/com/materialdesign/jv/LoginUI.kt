@@ -142,7 +142,7 @@ class LoginUI : AppCompatActivity() {
             }
         }
     }
-  
+
 
     private fun saveTokenToSharedPreferences(token: String) {
         val sharedPrefs = getSharedPreferences("auth_prefs", MODE_PRIVATE)
