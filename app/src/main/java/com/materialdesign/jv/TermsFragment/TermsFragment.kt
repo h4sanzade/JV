@@ -66,12 +66,11 @@ class TermsFragment : DialogFragment() {
     private fun setCloseButtonEnabled(enabled: Boolean) {
         closeButton.isEnabled = enabled
         if (enabled) {
-            closeButton.alpha = 1.0f
-            closeButton.setBackgroundResource(R.drawable.enabled_button_bg)
+            closeButton.alpha = 1.0f  // Full opacity when enabled
         } else {
-            closeButton.alpha = 0.5f
-            closeButton.setBackgroundResource(R.drawable.disabled_button_bg)
+            closeButton.alpha = 0.3f  // Half opacity when disabled
         }
+        // Remove the background resource changes to keep the original red color
     }
 
     override fun onStart() {
