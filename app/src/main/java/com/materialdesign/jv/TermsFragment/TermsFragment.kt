@@ -42,7 +42,7 @@ class TermsFragment : DialogFragment() {
         // Initially disable the close button
         setCloseButtonEnabled(false)
 
-        // Set up scroll listener to detect when user has scrolled to the bottom
+
         scrollView.viewTreeObserver.addOnGlobalLayoutListener {
             setupScrollListener()
         }
