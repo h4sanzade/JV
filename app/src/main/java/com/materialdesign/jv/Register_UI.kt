@@ -60,15 +60,15 @@ class Register_UI : AppCompatActivity() {
             override fun onClick(widget: View) {
                 val intent = Intent(this@Register_UI, LoginUI::class.java)
 
-                // Apply smooth transition animation (simple slide-in and slide-out)
+
                 val options = ActivityOptionsCompat.makeCustomAnimation(
                     this@Register_UI,
-                    R.anim.slide_in_right,   // Slide-in from right
-                    R.anim.slide_out_left    // Slide-out to left
+                    R.anim.slide_in_right,
+                    R.anim.slide_out_left
                 )
 
-                startActivity(intent, options.toBundle())  // Start activity with transition
-                finish()  // Close the current activity
+                startActivity(intent, options.toBundle())
+                finish()
             }
 
             override fun updateDrawState(ds: TextPaint) {
@@ -88,7 +88,6 @@ class Register_UI : AppCompatActivity() {
 
 
     private fun setupTermsCheckbox() {
-        // Create clickable "İstifadəçi Şərtləri və Qaydaları" text in checkbox
         val checkboxText = binding.termsCheckBox.text.toString()
         val termsText = "İstifadəçi Şərtləri və Qaydaları"
 
@@ -98,7 +97,7 @@ class Register_UI : AppCompatActivity() {
 
             val spannable = SpannableString(checkboxText)
 
-            // Add underline span
+
             spannable.setSpan(
                 UnderlineSpan(),
                 startIndex,
@@ -106,7 +105,7 @@ class Register_UI : AppCompatActivity() {
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
             )
 
-            // Add clickable span
+
             val clickableSpan = object : ClickableSpan() {
                 override fun onClick(widget: View) {
                     showTermsAndConditions()
@@ -114,7 +113,7 @@ class Register_UI : AppCompatActivity() {
 
                 override fun updateDrawState(ds: TextPaint) {
                     super.updateDrawState(ds)
-                    // Keep the default link color
+
                     ds.isUnderlineText = true
                 }
             }
@@ -141,7 +140,7 @@ class Register_UI : AppCompatActivity() {
 
     private fun setupRegisterButton() {
         binding.registerButton.setOnClickListener {
-            // Check if terms checkbox is checked
+
             if (!binding.termsCheckBox.isChecked) {
                 Toast.makeText(
                     this,
@@ -156,25 +155,24 @@ class Register_UI : AppCompatActivity() {
             val confirmPassword = binding.confirmPasswordEditText.text.toString()
             val phoneNumber = binding.phoneNumberInputEditText.text.toString()
 
-            // Check if any field is empty
+
             if (email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty() || phoneNumber.isEmpty()) {
                 Toast.makeText(this, "Zəhmət olmasa, bütün sahələri doldurun", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            // Check if passwords match
+
             if (password != confirmPassword) {
                 Toast.makeText(this, "Şifrələr uyğun gəlmir", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            // If everything is valid, proceed with registration
+
             performSignUp(email, password, confirmPassword, phoneNumber)
         }
     }
 
     private fun performSignUp(email: String, password: String, confirmPassword: String, phoneNumber: String) {
-        // Disable register button to prevent multiple requests
         binding.registerButton.isEnabled = false
 
         lifecycleScope.launch {
@@ -189,7 +187,6 @@ class Register_UI : AppCompatActivity() {
                 val response = RetrofitInstance.api.signUp(signUpRequest)
 
                 if (response.isSuccessful && response.body() != null) {
-                    // Save token
                     val token = response.body()!!.data.token
                     saveTokenToSharedPreferences(token)
 
@@ -199,12 +196,10 @@ class Register_UI : AppCompatActivity() {
                         Toast.LENGTH_SHORT
                     ).show()
 
-                    // Navigate to login activity
                     val intent = Intent(this@Register_UI, LoginUI::class.java)
                     startActivity(intent)
-                    finish() // Close registration activity
+                    finish()
                 } else {
-                    // Parse error response
                     val errorMessage = parseErrorResponse(response.errorBody())
                     Toast.makeText(
                         this@Register_UI,
@@ -219,7 +214,7 @@ class Register_UI : AppCompatActivity() {
                     Toast.LENGTH_SHORT
                 ).show()
             } catch (e: HttpException) {
-                // Parse error response from HttpException
+
                 val errorMessage = parseErrorResponse(e.response()?.errorBody())
                 Toast.makeText(
                     this@Register_UI,
@@ -233,7 +228,7 @@ class Register_UI : AppCompatActivity() {
                     Toast.LENGTH_SHORT
                 ).show()
             } finally {
-                // Re-enable register button
+
                 binding.registerButton.isEnabled = true
             }
         }
@@ -245,7 +240,7 @@ class Register_UI : AppCompatActivity() {
             if (errorBody != null) {
                 val errorResponse = gson.fromJson(errorBody.string(), ErrorResponse::class.java)
                 when {
-                    // Check for different possible error message formats
+
                     !errorResponse.message.isNullOrEmpty() -> errorResponse.message
                     !errorResponse.error.isNullOrEmpty() -> errorResponse.error
                     !errorResponse.errors.isNullOrEmpty() -> errorResponse.errors.joinToString("\n")
